@@ -12,11 +12,14 @@ for item in os.listdir(PullDirectory): # For each in the directory given to pull
         with Image.open(ItemPath) as img:
             if img.format == "GIF": # Check if the item is a gif file.
                 print(f"Found gif file '{item}' \nAttempting to convert...")
+                try: # Attempt to convert from gif to jpeg.
+                    img = img.convert("RGB") # "RGB" and not "RGBA" because jpeg does not support transparency.
 
-                img = img.convert("RGB") # "RGB" and not "RGBA" because jpg does not support transparency.
+                    filename = os.path.splitext(os.path.basename(ItemPath))[0] # Get the name of the file without the .extension
+                    destinationPath = os.path.join(Destination, filename + ".jpg") # Make the destination path.
 
-                filename = os.path.splitext(os.path.basename(ItemPath))[0] # Get the name of the file without the .extension
-                destinationPath = os.path.join(Destination, filename + ".jpg") # Make the destination path
-
-                img.save(destinationPath, "JPEG") # Save Image
-                print(f"Successfully converted '{item}' to '{destinationPath}'")
+                    img.save(destinationPath, "JPEG") # Save image.
+                except: # If saving fails... 
+                    print(f"Failed to convert '{item}")
+                else: # If saving succeeds...
+                    print(f"Successfully converted '{item}' to '{destinationPath}'")
