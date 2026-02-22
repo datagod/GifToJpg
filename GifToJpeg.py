@@ -20,7 +20,7 @@ AUTHOR
     Jacob McEvoy
 
 CREATED
-    February 22, 2026
+    2025
 
 VERSION
     1.0.0
@@ -90,4 +90,5 @@ for item in os.listdir(PullDirectory): # For each in the directory given to pull
                     print(f"Failed to convert '{item}")
                 else: # If saving succeeds...
                     print(f"Successfully converted '{item}' to '{destinationPath}'")
+
 
